@@ -98,6 +98,7 @@ void UpdateFan()
 		int id = Play::CreateGameObject(TYPE_TOOL, obj_fan.pos, 50, "driver");
 		GameObject& obj_tool = Play::GetGameObject(id);
 		obj_tool.velocity = Point2f(-8, Play::RandomRollRange(-1, 1) * 6);
+		
 		if (Play::RandomRoll(2) == 1)
 		{
 			Play::SetSprite(obj_tool, "spanner", 0);
@@ -115,6 +116,7 @@ void UpdateFan()
 		obj_coin.rotSpeed = 0.1f;
 	}
 	Play::UpdateGameObject(obj_fan);
+
 	if (Play::IsLeavingDisplayArea(obj_fan))
 	{
 		obj_fan.pos = obj_fan.oldPos;
@@ -130,6 +132,7 @@ void UpdateTools()
 	for (int id : vTools)
 	{
 		GameObject& obj_tool = Play::GetGameObject(id);
+
 		if (Play::IsColliding(obj_tool, obj_agent8))
 		{
 			Play::StopAudioLoop("music");
@@ -137,12 +140,14 @@ void UpdateTools()
 			obj_agent8.pos = { -100, -100 };
 		}
 		Play::UpdateGameObject(obj_tool);
+
 		if (Play::IsLeavingDisplayArea(obj_tool, Play::VERTICAL))
 		{
 			obj_tool.pos = obj_tool.oldPos;
 			obj_tool.velocity.y *= -1;
 		}
 		Play::DrawObjectRotated(obj_tool);
+
 		if (!Play::IsVisible(obj_tool))
 			Play::DestroyGameObject(id);
 	}
