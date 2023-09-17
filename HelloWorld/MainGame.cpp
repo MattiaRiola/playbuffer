@@ -88,8 +88,6 @@ void HandlePlayerControls()
 
 }
 
-
-
 void UpdateFan()
 {
 	GameObject& obj_fan = Play::GetGameObjectByType(TYPE_FAN);
@@ -116,14 +114,13 @@ void UpdateFan()
 	Play::DrawObject(obj_fan);
 }
 
-
 void UpdateTools()
 {
 	GameObject& obj_agent8 = Play::GetGameObjectByType(TYPE_AGENT8);
 	std::vector<int> vTools = Play::CollectGameObjectIDsByType(TYPE_TOOL);
 	for (int id : vTools)
 	{
-		GameObject& obj_tool = Play::GetGameObjectByType(id);
+		GameObject& obj_tool = Play::GetGameObject(id);
 		if (Play::IsColliding(obj_tool, obj_agent8))
 		{
 			Play::StopAudioLoop("music");
@@ -140,5 +137,4 @@ void UpdateTools()
 		if (!Play::IsVisible(obj_tool))
 			Play::DestroyGameObject(id);
 	}
-
 }
